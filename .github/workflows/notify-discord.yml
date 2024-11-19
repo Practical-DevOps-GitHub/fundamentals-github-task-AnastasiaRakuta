@@ -1,8 +1,9 @@
-name: Notify Discord on PR
+name: Notify Discord on Push
 
 on:
-  pull_request:
-    types: [opened]
+  push:
+    branches:
+      - develop
 
 jobs:
   notify:
@@ -11,6 +12,6 @@ jobs:
     steps:
       - name: Send Discord Notification
         run: |
-          curl -H "Content-Type: application/json" -X POST -d '{"content": "Новый Pull Request создан: ${{ github.event.pull_request.html_url }}"}' ${DISCORD_WEBHOOK_URL}
+          curl -H "Content-Type: application/json" -X POST -d '{"content": "Новий коміт додано: ${{ github.event.head_commit.url }}"}' ${DISCORD_WEBHOOK_URL}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
