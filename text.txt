@@ -1,1 +1,1 @@
-Create project for this repository
+Create discord server and add notification when PR was created
